@@ -103,7 +103,6 @@ export const E2E_TOUCHFILES: Record<string, string[]> = {
   // INSIDE the existing 4 plan-X-review-plan-mode test files (covered
   // transitively by the entries above). Two new standalone files exist for
   // skills with no prior plan-mode test:
-  'autoplan-auto-mode':           ['autoplan/**', 'plan-ceo-review/**', 'plan-design-review/**', 'plan-eng-review/**', 'plan-devex-review/**', 'scripts/resolvers/preamble/generate-completion-status.ts', 'scripts/resolvers/question-tuning.ts', 'scripts/resolvers/preamble/generate-ask-user-format.ts', 'scripts/resolvers/preamble.ts', 'test/helpers/claude-pty-runner.ts'],
   'office-hours-auto-mode':       ['office-hours/**', 'scripts/resolvers/preamble/generate-completion-status.ts', 'scripts/resolvers/question-tuning.ts', 'scripts/resolvers/preamble/generate-ask-user-format.ts', 'scripts/resolvers/preamble.ts', 'test/helpers/claude-pty-runner.ts'],
   'office-hours-phase4-fork':     ['office-hours/**', 'scripts/resolvers/preamble/generate-ask-user-format.ts', 'scripts/resolvers/preamble/generate-completion-status.ts', 'scripts/resolvers/preamble.ts', 'scripts/resolvers/question-tuning.ts', 'test/helpers/llm-judge.ts', 'test/skill-e2e-office-hours-phase4.test.ts'],
   'llm-judge-recommendation':     ['test/helpers/llm-judge.ts', 'test/llm-judge-recommendation.test.ts', 'scripts/resolvers/preamble/generate-ask-user-format.ts', 'codex/SKILL.md.tmpl', 'scripts/resolvers/review.ts'],
@@ -423,7 +422,6 @@ export const E2E_TIERS: Record<string, 'gate' | 'periodic'> = {
   'plan-devex-review-plan-mode': 'gate',
   'plan-mode-no-op': 'gate',
   // v1.21+ auto-mode regression tests
-  'autoplan-auto-mode': 'gate',
   'office-hours-auto-mode': 'gate',
   'auto-decide-preserved': 'periodic',
   'e2e-harness-audit': 'gate',
