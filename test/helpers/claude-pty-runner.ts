@@ -519,10 +519,13 @@ export function isProseAUQVisible(visible: string): boolean {
   }
   if (letteredHits.size >= 2) return true;
 
-  // Pattern 2: 3+ distinct numbered options at line starts, AND no `❯<spaces>1.`
-  // cursor anywhere in the FULL visible buffer (which would mean
-  // isNumberedOptionListVisible already covers the case via the native UI).
-  if (/❯\s*1\./.test(visible)) return false;
+  // Pattern 2: 3+ distinct numbered options at line starts, AND no
+  // `❯<spaces>1.` cursor IN THE RECENT TAIL (not the full buffer — a
+  // trust-dialog `❯ 1. Yes` at boot is in scrollback forever and
+  // would otherwise suppress this path for the rest of the run).
+  // The native-UI deferral only applies when the cursor list is
+  // currently rendered, not historically.
+  if (/❯\s*1\./.test(tail)) return false;
   const numberedRe = /(?:^|\n)[ \t❯]*([1-9])\./g;
   const numberedHits = new Set<string>();
   let nm: RegExpExecArray | null;

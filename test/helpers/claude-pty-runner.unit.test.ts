@@ -226,13 +226,25 @@ What's the task? A few options:
     expect(isProseAUQVisible(sample)).toBe(true);
   });
 
-  test('returns false when ❯ 1. cursor is present (native UI handled by isNumberedOptionListVisible)', () => {
+  test('returns false when ❯ 1. cursor is present in the recent tail (native UI handled by isNumberedOptionListVisible)', () => {
     const sample = `
 ❯ 1. First option
   2. Second option
   3. Third option
 `;
     expect(isProseAUQVisible(sample)).toBe(false);
+  });
+
+  test('does NOT suppress numbered-prose detection when ❯ 1. is only in early scrollback (trust dialog)', () => {
+    // Boot trust dialog rendered ❯ 1. Yes at startup, then a long body of
+    // model output, then prose-rendered numbered options now. The historic
+    // ❯ 1. is in the full buffer but NOT in the recent tail. Should detect
+    // the prose AUQ.
+    const trustHeader = '❯ 1. Yes, trust\n  2. No\n';
+    const filler = 'x'.repeat(5000); // pushes trust dialog out of last 4KB tail
+    const proseAUQ = `\n  1. Review the docs\n  2. Investigate the code\n  3. Defer to next session\n❯  \n`;
+    const sample = trustHeader + filler + proseAUQ;
+    expect(isProseAUQVisible(sample)).toBe(true);
   });
 
   test('returns false on single lettered option', () => {
