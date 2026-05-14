@@ -8,11 +8,11 @@ name: Windows Free Tests
 # targeted resolver tests that exercise the Bun.which-based claude binary
 # resolution + the GSTACK_CLAUDE_BIN override path on Windows.
 #
-# Runner: migrated v1.36.0.0 from GitHub-hosted `windows-latest` to Blacksmith's
-# paid Windows runner. Spin-up is ~10s vs ~60s and Bun installs land 3-4x faster.
-# If Blacksmith isn't configured for this org, swap to `windows-latest` (the
-# free GitHub runner, slower but always available). Namespace, Ubicloud-Windows,
-# and other paid pools work too — just match your org's billing.
+# Runner: migrated v1.38.0.0 from GitHub-hosted `windows-latest` to the paid
+# GitHub-hosted `windows-latest-8-cores` runner — 4x more cores at GitHub's
+# larger-runner billing rate. Ubicloud doesn't ship Windows runners (only
+# Linux), so we stay GitHub-hosted. Swap to `windows-latest` to revert to
+# the free runner if billing/quota becomes an issue.
 #
 # What this DOES NOT do (still out of scope, tracked as follow-up):
 #   - Run the full free suite on Windows. The 24 tests that hardcode /bin/sh,
@@ -33,10 +33,9 @@ concurrency:
 
 jobs:
   windows-free-tests:
-    # Paid faster Windows runner. Verify the label matches what's enabled for
-    # this repo's Blacksmith installation. Common alternatives:
-    #   blacksmith-4vcpu-windows-2022, namespace-profile-windows, windows-latest
-    runs-on: blacksmith-2vcpu-windows-2022
+    # Paid GitHub-hosted larger Windows runner (8 cores vs the free 4-core
+    # windows-latest). To revert: swap to `windows-latest`.
+    runs-on: windows-latest-8-cores
     timeout-minutes: 15
 
     steps:
