@@ -75,7 +75,7 @@ Invoke them by name (e.g., `/office-hours`).
 | `/setup-browser-cookies` | Import cookies from your real browser for authenticated testing. |
 | `/pair-agent` | Pair a remote AI agent (OpenClaw, Codex, etc.) with your browser. |
 
-### iOS device-farm (v1.40.0.0+)
+### iOS device-farm (v1.43.0.0+)
 
 | Skill | What it does |
 |-------|-------------|
