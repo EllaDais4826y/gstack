@@ -57,7 +57,9 @@ Best for: you'd rather click through supabase.com yourself than paste a PAT.
 
 Best for: try-it-first, no account, no cloud, no sharing. Or a dedicated "this Mac's brain" that stays isolated from any cloud agent.
 
-**What happens:** `gbrain init --pglite`. Brain lives at `~/.gbrain/brain.pglite`. No network calls. Done in 30 seconds.
+**What happens:** `gbrain init --pglite`. Brain lives at `~/.gbrain/brain.pglite`. No network calls for the init itself. Done in 30 seconds.
+
+**Embedding model.** When `VOYAGE_API_KEY` is set, gstack inits PGLite with `voyage-code-3` (1024-dim) — Voyage's code-specialized embedding model, which beats their general-purpose `voyage-4-large` and OpenAI `text-embedding-3-large` head-to-head on this codebase's symbol queries. Without `VOYAGE_API_KEY`, gbrain auto-selects (OpenAI 1536-dim when `OPENAI_API_KEY` is present, else falls down its provider chain). Either way, the embeddings call out to the chosen provider's API during sync — set the key for the provider you want before running `/sync-gbrain`.
 
 This is the best first choice if you just want to see what gbrain feels like before committing to cloud. You can always migrate later with `/setup-gbrain --switch`.
 
